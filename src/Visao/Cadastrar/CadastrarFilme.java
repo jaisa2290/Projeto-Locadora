@@ -75,10 +75,6 @@ public class CadastrarFilme extends javax.swing.JFrame {
 
         jTextField7.setText("000:00");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton1.setText("Ok");
 
         jButton2.setText("Limpar");
@@ -183,7 +179,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                             .addComponent(jButton1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -191,7 +187,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
                     .addComponent(jButton4)))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Cadastro de Filme");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

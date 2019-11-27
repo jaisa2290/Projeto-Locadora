@@ -39,8 +39,6 @@ public class ExcluirCategoria extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
-
         jButton1.setText("Ok");
 
         jButton2.setText("Cancelar");
@@ -82,7 +80,7 @@ public class ExcluirCategoria extends javax.swing.JFrame {
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Excluir Categoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
