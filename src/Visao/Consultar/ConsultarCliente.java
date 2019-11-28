@@ -50,7 +50,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Cliente", "RG", "CPF"
+                "Nome", "RG", "CPF", "Email", "Telefone"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
