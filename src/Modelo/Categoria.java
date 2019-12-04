@@ -5,10 +5,7 @@
  */
 package Modelo;
 
-/**
- *
- * @author MONIQUE BENTO
- */
+
 public class Categoria {
     
     private int codigo;
