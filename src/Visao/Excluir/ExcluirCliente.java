@@ -1,10 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Visao.Excluir;
 
+import DAO.CategoriaDAO;
+import DAO.ClienteDAO;
+import DAO.Conexao;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import Modelo.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author MONIQUE BENTO
@@ -14,10 +18,40 @@ public class ExcluirCliente extends javax.swing.JFrame {
     /**
      * Creates new form ExcluirCliente
      */
-    public ExcluirCliente() {
+        public ExcluirCliente() {
         initComponents();
+    AtualizaCombo();
     }
 
+    public void AtualizaCombo(){
+        Connection con = Conexao.AbrirConexao();
+        ClienteDAO sql = new ClienteDAO(con);
+        List<Cliente> lista = new ArrayList<>();
+        
+        lista = sql.ListarComboCliente();
+        jComboBox1.addItem(" - ");
+        
+        for (Cliente b : lista) {
+            jComboBox1.addItem(b.getNome());
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+    
+    public void SelecionarCombo(){
+        Connection con = Conexao.AbrirConexao();
+        ClienteDAO sql = new ClienteDAO(con);
+        List<Cliente> lista = new ArrayList<>();
+        String nome = jComboBox1.getSelectedItem().toString();
+        
+        lista = sql.ConsultaCodigoCliente(nome);
+        
+        for (Cliente b : lista) {
+            int a = b.getCodigo();
+            jTextField1.setText(""+a);
+        }
+        Conexao.FecharConexao(con);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +76,18 @@ public class ExcluirCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -105,6 +150,37 @@ public class ExcluirCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        SelecionarCombo();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String codigo = jTextField1.getText();
+        String nome = jComboBox1.getSelectedItem().toString();
+        
+        Connection con = Conexao.AbrirConexao();
+        ClienteDAO sql = new ClienteDAO(con);
+        Cliente a = new Cliente();
+        
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum nome selecionado", "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int b = JOptionPane.showConfirmDialog(null,"Deseja realmente excluir "+ nome +" | "+ codigo +"?", "Video Locadora",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            if (b == 0) {
+                int cod = Integer.parseInt(codigo);
+                a.setNome(nome);
+                a.setCodigo(cod);
+                sql.Excluir_Cliente(a);
+                Conexao.FecharConexao(con);
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

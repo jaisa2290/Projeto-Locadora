@@ -1,11 +1,7 @@
-/*
 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
-
+import java.util.ArrayList;
+import java.util.List;
 import Modelo.Cliente;
 import java.sql.*;
 
@@ -19,8 +15,6 @@ public class ClienteDAO extends ExecuteSQL{
         super(con);
     }
     
-    
-
     public String Inserir_Cliente(Cliente a) {
         String sql = "insert into cliente values (0,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -49,7 +43,116 @@ public class ClienteDAO extends ExecuteSQL{
    
     }
 
+public List<Cliente> ListarComboCliente(){
+        
+        String sql = "select nome from cliente order by nome";
+        List<Cliente> lista = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                
+                while (rs.next()) {
+                    
+                    Cliente a = new Cliente();
+                    a.setNome(rs.getString(1));
+                    lista.add(a);
+                    
+                }
+                
+                return lista;
+                
+            } else {
+                
+                return null;
+                
+            }
+            
+        } catch (Exception e) {
+        
+            return null;
+        
+        }
+        
+    }
 
+    public List<Cliente> ConsultaNomeCliente(int cod){
+        
+        String sql = "select nome from cliente where idcliente = "+ cod +" order by nome";
+        List<Cliente> lista = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                
+                while (rs.next()) {
+                    
+                    Cliente a = new Cliente();
+                    a.setNome(rs.getString(1));
+                    lista.add(a);
+                    
+                }
+                
+                return lista;
+                
+            } else {
+                
+                return null;
+                
+            }
+            
+        } catch (Exception e) {
+        
+            return null;
+        
+        }
+        
+    }
+    
+    public List<Cliente> ConsultaCodigoCliente(String nome) {
+        String sql = "select idcliente from cliente where nome = '"+ nome +"'";
+        List<Cliente> lista = new ArrayList<>();
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs != null) {
+                while (rs.next()) {
+                    Cliente a = new Cliente();
+                    a.setCodigo(rs.getInt(1));
+                    lista.add(a);
+                }
+                return lista;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public String Excluir_Cliente(Cliente a){
+        String sql = "delete from cliente where idcliente = ? and nome = ?";
+        try {
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, a.getCodigo());
+            ps.setString(2, a.getNome());
+            
+            if (ps.executeUpdate() > 0) {
+                return "Excluido com sucesso";
+            } else {
+                return "Erro ao excluir";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
 
 
 
