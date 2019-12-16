@@ -22,7 +22,7 @@ public class ExcluirClassificacao extends javax.swing.JFrame {
         initComponents();
         AtualizaCombo();
     }
-public void AtualizaCombo(){
+    public void AtualizaCombo(){
         Connection con = Conexao.AbrirConexao();
         ClassificacaoDAO sql = new ClassificacaoDAO(con);
         List<Classificacao> lista = new ArrayList<>();

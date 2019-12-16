@@ -5,6 +5,16 @@
  */
 package Visao.Alterar;
 
+import DAO.CategoriaDAO;
+import DAO.ClienteDAO;
+import DAO.Conexao;
+import Modelo.Categoria;
+import Modelo.Cliente;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author MONIQUE BENTO
@@ -16,6 +26,23 @@ public class AlterarCategoria extends javax.swing.JFrame {
      */
     public AlterarCategoria() {
         initComponents();
+    }
+    
+    private void InserirDados(int cod) {
+        
+        Connection con = Conexao.AbrirConexao();
+        CategoriaDAO sql = new CategoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        lista = sql.CapturarCategoria(cod);
+        
+        for (Categoria a : lista) {
+            
+            jTF_Cod.setText("" + a.getCodigo());
+            jTF_Nome.setText(a.getNome());
+            
+        }
+        
+        Conexao.FecharConexao(con);
     }
 
     /**
@@ -32,9 +59,9 @@ public class AlterarCategoria extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTF_Cod = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTF_Nome = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -50,6 +77,11 @@ public class AlterarCategoria extends javax.swing.JFrame {
         jLabel2.setText("Digite o Codigo:");
 
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Codigo:");
 
@@ -58,6 +90,11 @@ public class AlterarCategoria extends javax.swing.JFrame {
         jButton2.setText("Limpar");
 
         jButton3.setText("Alterar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cancelar");
 
@@ -87,12 +124,12 @@ public class AlterarCategoria extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                        .addComponent(jTF_Cod, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3))
+                        .addComponent(jTF_Nome))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jButton2)
@@ -122,11 +159,11 @@ public class AlterarCategoria extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTF_Cod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTF_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -139,6 +176,55 @@ public class AlterarCategoria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String codigo = jTF_Cod.getText();
+        Connection con = Conexao.AbrirConexao();
+        CategoriaDAO sql = new CategoriaDAO (con);
+        int cod = Integer.parseInt(codigo);
+        if (sql.Testar_Categoria(cod) == false) {
+            JOptionPane.showMessageDialog(null, "Codigo não Encontrado no Banco",
+                     "Video Locadora", JOptionPane.ERROR_MESSAGE);
+            Conexao.FecharConexao(con); 
+            {
+            if (codigo.equals("")) {
+                JOptionPane.showMessageDialog(null, "Digite um Codigo para Atualizar",
+                        "Video Locadora", JOptionPane.WARNING_MESSAGE);
+            }    
+            jTF_Cod.setText("");
+            jTF_Nome.setText("");
+            
+            InserirDados(cod);
+            jTF_Cod.setText("");
+            
+            }         
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String codigo = jTF_Cod.getText ();
+       String nome = jTF_Nome.getText ();
+       if (nome.equals ("")){
+               JOptionPane.showMessageDialog(null, "nenhum campo pode estar vazio"
+               , "Video Locadora", JOptionPane.WARNING_MESSAGE);
+       } else {
+           Connection con = Conexao.AbrirConexao();
+           CategoriaDAO sql = new CategoriaDAO(con);
+           int cod = Integer.parseInt(codigo);
+           Categoria a = new Categoria();    
+                   
+           a.setCodigo(cod);
+           a.setNome(nome);
+           
+           sql.Alterar_Categoria(a);
+           Conexao.FecharConexao(con);
+           
+           jTF_Nome.setText("");
+           JOptionPane.showMessageDialog(null,"Cadastro Realizado com Sucesso",
+                   "Video LOcadora", JOptionPane.INFORMATION_MESSAGE);
+           dispose();
+       }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,8 +273,8 @@ public class AlterarCategoria extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField jTF_Cod;
+    private javax.swing.JTextField jTF_Nome;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

@@ -93,4 +93,12 @@ public class ClassificacaoDAO extends ExecuteSQL {
             return e.getMessage();
         }
     }
+
+    public List<Classificacao> ListarPrecoClassificacao(int codigo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Classificacao> CapturarClassificacao(int cod) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

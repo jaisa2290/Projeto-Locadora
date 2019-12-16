@@ -91,4 +91,12 @@ public class DVDDAO extends ExecuteSQL {
                 }
                 return teste;
     }
+
+    public List<DVD> ListarCodFilme(int cod) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<DVD> CapturarDVD(int cod) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -124,7 +124,7 @@ public class CadastroFilme extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabelCapa = new javax.swing.JLabel();
-        btOK = new javax.swing.JButton();
+        btCapa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -246,10 +246,10 @@ public class CadastroFilme extends javax.swing.JFrame {
 
         jLabelCapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/teste.png"))); // NOI18N
 
-        btOK.setText("Ok");
-        btOK.addActionListener(new java.awt.event.ActionListener() {
+        btCapa.setText("Ok");
+        btCapa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btOKActionPerformed(evt);
+                btCapaActionPerformed(evt);
             }
         });
 
@@ -280,7 +280,7 @@ public class CadastroFilme extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btOK))
+                                .addComponent(btCapa))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTF_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -347,7 +347,7 @@ public class CadastroFilme extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(btOK)))
+                            .addComponent(btCapa)))
                     .addComponent(jLabelCapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -405,6 +405,8 @@ public class CadastroFilme extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
         }
+    
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -428,16 +430,12 @@ public class CadastroFilme extends javax.swing.JFrame {
         jTF_Categoria.setText("");
         jTF_Classificacao.setText("");
         tfCapa.setText("");
-
+    
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
-     
-    }
-                
- 
-        
-    }//GEN-LAST:event_btOKActionPerformed
+    private void btCapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapaActionPerformed
+
+    }//GEN-LAST:event_btCapaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,7 +475,7 @@ public class CadastroFilme extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Select_Categoria;
     private javax.swing.JComboBox<String> Select_Class;
-    private javax.swing.JButton btOK;
+    private javax.swing.JButton btCapa;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

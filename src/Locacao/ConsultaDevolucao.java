@@ -5,6 +5,8 @@
  */
 package Locacao;
 
+import Modelo.Listar;
+
 /**
  *
  * @author MONIQUE BENTO
@@ -30,13 +32,13 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Cliente:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -44,7 +46,12 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
                 "Codigo", "Cliente", "DVD", "Horario", "Locação", "Devolução"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +82,20 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+
+        Integer linha = jTable.getSelectedRow();
+        Integer idaluguel = (Integer) jTable.getValueAt(linha, 0);
+        Integer idcliente = (Integer) jTable.getValueAt(linha, 1);
+        Integer iddvd = (Integer) jTable.getValueAt(linha, 2);
+        Listar a = new Listar();
+        a.setCoddvd(iddvd);
+        a.setCodaluguel(idaluguel);
+        a.setCodcliente(idcliente);
+        
+        new EfetuarDevolucao().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -115,6 +136,6 @@ public class ConsultaDevolucao extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,7 +51,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="tfCapa" min="-2" pref="297" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btOK" min="-2" max="-2" attributes="0"/>
+                              <Component id="btCapa" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jTextField1" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
                           <Component id="jTF_Titulo" alignment="0" min="-2" pref="410" max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfCapa" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btOK" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btCapa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabelCapa" max="32767" attributes="0"/>
@@ -377,12 +377,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btOK">
+    <Component class="javax.swing.JButton" name="btCapa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ok"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btOKActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCapaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -5,6 +5,16 @@
  */
 package Visao.Consultar;
 
+import DAO.ClienteDAO;
+import DAO.Conexao;
+import DAO.FuncionarioDAO;
+import Modelo.Cliente;
+import Modelo.Funcionario;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MONIQUE BENTO
@@ -16,7 +26,33 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
      */
     public ConsultarFuncionario() {
         initComponents();
+        setTitle("Video Locadora");
+        setSize(970, 380);
+        AtualizaTable();
+        }
+    
+    private void AtualizaTable() {
+    Connection con = Conexao.AbrirConexao();
+    FuncionarioDAO bd = new FuncionarioDAO(con);
+    List<Funcionario> lista = new ArrayList<>();
+    lista = bd.ListarFuncionario();
+    DefaultTableModel tbm =
+          (DefaultTableModel) jTable1.getModel();
+    while (tbm.getRowCount() > 0) {
+        tbm.removeRow(0);
     }
+    int i = 0;
+    for (Funcionario tab : lista) {
+        tbm.addRow(new String[i]);
+        jTable1.setValueAt(tab.getCod(), i, 0);
+        jTable1.setValueAt(tab.getNome(), i, 1);
+        jTable1.setValueAt(tab.getLogin(), i, 2);
+        jTable1.setValueAt(tab.getSenha(), i, 3);
+        i++;
+    }
+    Conexao.FecharConexao(con);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

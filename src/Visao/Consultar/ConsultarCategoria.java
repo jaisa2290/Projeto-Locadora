@@ -5,6 +5,17 @@
  */
 package Visao.Consultar;
 
+import DAO.CategoriaDAO;
+import DAO.ClienteDAO;
+import DAO.Conexao;
+import Modelo.Categoria;
+import Modelo.Cliente;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author MONIQUE BENTO
@@ -16,6 +27,29 @@ public class ConsultarCategoria extends javax.swing.JFrame {
      */
     public ConsultarCategoria() {
         initComponents();
+        setTitle("Video Locadora");
+        setSize(970, 380);
+        AtualizaTable();
+    }
+    
+    private void AtualizaTable() {
+    Connection con = Conexao.AbrirConexao();
+    CategoriaDAO bd = new CategoriaDAO(con);
+    List<Categoria> lista = new ArrayList<>();
+    lista = bd.ListarCategoria();
+    DefaultTableModel tbm =
+          (DefaultTableModel) jTable1.getModel();
+    while (tbm.getRowCount() > 0) {
+        tbm.removeRow(0);
+    }
+    int i = 0;
+    for (Categoria tab : lista) {
+        tbm.addRow(new String[i]);
+        jTable1.setValueAt(tab.getCodigo(), i, 0);
+        jTable1.setValueAt(tab.getNome(), i, 1);
+        i++;
+    }
+    Conexao.FecharConexao(con);
     }
 
     /**
